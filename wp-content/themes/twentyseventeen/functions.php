@@ -564,3 +564,126 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  * SVG icons functions and filters.
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
+
+/* 访问计数 */  
+function getPostViews($postID){
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+        return "0";
+    }
+    return $count;
+}
+function setPostViews($postID) {
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        $count = 0;
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+    }else{
+        $count++;
+        update_post_meta($postID, $count_key, $count);
+    }
+}
+
+//标签云的样式
+function colorCloud($text) {
+	$text = preg_replace_callback('|<a (.+?)>|i', 'colorCloudCallback', $text);
+	return $text;
+}
+function colorCloudCallback($matches) {
+	$text = $matches[1];
+	$colors=array('ff3300','0517c2','0fc317','e7cc17','601165','ffb900','f74e1e','00a4ef','7fba00');
+	$color=$colors[dechex(rand(0,3))];
+	$pattern = '/style=(\'|\")(.*)(\'|\")/i';
+	$text = preg_replace($pattern, "style=\"color:#{$color};$2;border:1px solid #ebebeb;margin:3px;display:inline-block;\"", $text);
+	return "<a $text>";
+}
+add_filter('wp_tag_cloud', 'colorCloud', 1);
+
+
+
+
+//每篇文章添加自定义字段
+//添加了link,o_author,score三个字段
+/* Define the custom box，适用WP 3.0以后的版本 */
+add_action( 'add_meta_boxes', 'ludou_add_custom_box' );
+
+// 如果是WP 3.0之前的版本，使用以下一行代码
+// add_action( 'admin_init', 'ludou_add_custom_box', 1 );
+
+/* Do something with the data entered */
+add_action( 'save_post', 'ludou_save_postdata' );
+
+/* Adds a box to the main column on the Post and Page edit screens */
+function ludou_add_custom_box() {
+  add_meta_box(
+    'ludou_sectionid',
+    'link', // 可自行修改标题文字
+    'ludou_inner_custom_box',
+    'post'
+  );
+}
+
+/* Prints the box content */
+function ludou_inner_custom_box( $post ) {
+  global $wpdb;
+   
+  // Use nonce for verification
+  wp_nonce_field( plugin_basename( __FILE__ ), 'ludou_noncename' );
+   
+  // 获取固定字段keywords和description的值，用于显示之前保存的值
+  // 此处wp_posts新添加的字段为keywords和description，多个用半角逗号隔开
+  $date = $wpdb->get_row( $wpdb->prepare( "SELECT book_link,o_author,score FROM $wpdb->posts WHERE ID = %d", $post->ID) );
+
+  // Keywords 字段输入框的HTML代码
+  echo '<label for="book_link_new_field">book_link</label> ';
+  echo '<input type="text" id="keywords_new_field" name="keywords_new_field" value="'.$date->book_link.'" size="18" />';
+  
+  echo '<label for="o_author_new_field">o_author</label> ';
+  echo '<input type="text" id="o_author_new_field" name="o_author_new_field" value="'.$date->o_author.'" size="18" />';
+
+  echo '<label for="score_new_field">score</label> ';
+  echo '<input type="text" id="score_new_field" name="score_new_field" value="'.$date->score.'" size="18" />';
+
+  // 多个字段依此类推
+}
+
+/* 文章提交更新后，保存固定字段的值 */
+function ludou_save_postdata( $post_id ) {
+  // verify if this is an auto save routine.
+  // If it is our form has not been submitted, so we dont want to do anything
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+      return;
+
+  //通过api创建文章时，不需要以下检查
+  // verify this came from the our screen and with proper authorization,
+  // because save_post can be triggered at other times
+  // if ( !wp_verify_nonce( $_POST['ludou_noncename'], plugin_basename( __FILE__ ) ) )
+  //     return;
+ 
+  // 权限验证
+  // if ( 'post' == $_POST['post_type'] ) {
+  //   if ( !current_user_can( 'edit_post', $post_id ) )
+  //       return;
+  // }
+
+  // 获取编写文章时填写的固定字段的值，多个字段依此类推
+  $book_link = $_POST['book_link_new_field'];
+  $o_author = $_POST['o_author_new_field'];
+  $score = $_POST['score_new_field'];
+   
+  // 更新数据库，此处wp_posts新添加的字段为keywords和description，多个根据你的情况修改
+  global $wpdb;
+  $wpdb->update( "$wpdb->posts",
+          // 以下一行代码，多个字段的话参照下面的写法，单引号中是字段名，右边是变量值。半角逗号隔开
+          array( 'book_link' => $book_link,'o_author' => $o_author, 'score' =>$score),
+          array( 'ID' => $post_id ),
+          // 添加了多少个新字段就写多少个%s，半角逗号隔开
+          array( '%s' ,'%s','%s'),
+          array( '%d' )  
+  );
+}

@@ -16,14 +16,20 @@ get_header(); ?>
 
 	<?php if ( have_posts() ) : ?>
 		<header class="page-header">
+			<div style='color:#999;text-indent:25px;
+			background:url(<?php echo home_url();?>/wp-content/themes/twentyseventeen/assets/images/bread.png) no-repeat 0 5px'>
+				当前位置 >
 			<?php
-				the_archive_title( '<h1 class="page-title">', '</h1>' );
-				the_archive_description( '<div class="taxonomy-description">', '</div>' );
+				the_archive_title();
+				// the_archive_description();
 			?>
+			</div>
+
 		</header><!-- .page-header -->
 	<?php endif; ?>
 
-	<div id="primary" class="content-area">
+	<div id="primary" class="content-area" style="width:70%;border:1px solid #ebebeb;
+			margin-right:0px;background:#fff;padding:15px">
 		<main id="main" class="site-main" role="main">
 
 		<?php
@@ -37,8 +43,8 @@ get_header(); ?>
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 				 */
-				get_template_part( 'template-parts/post/content', get_post_format() );
-
+				get_template_part( 'template-parts/post/content', 'fulllist' );
+				echo '<hr>';
 			endwhile;
 
 			the_posts_pagination( array(
@@ -55,7 +61,7 @@ get_header(); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-	<?php get_sidebar(); ?>
+	<?php get_template_part( 'template-parts/post/content-push');?>
 </div><!-- .wrap -->
 
 <?php get_footer();

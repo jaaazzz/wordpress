@@ -52,7 +52,7 @@ Styles based on Normalize v5.0.0 @link https://github.com/necolas/normalize.css
 --------------------------------------------------------------*/
 
 html {
-	font-family: sans-serif;
+	font-family: "Microsoft Yahei",sans-serif;
 	line-height: 1.15;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -668,7 +668,7 @@ html[lang^="zh-"] button,
 html[lang^="zh-"] input,
 html[lang^="zh-"] select,
 html[lang^="zh-"] textarea {
-	font-family: "PingFang TC", "Helvetica Neue", Helvetica, STHeitiTC-Light, Arial, sans-serif;
+	font-family: "Microsoft Yahei","PingFang TC", "Helvetica Neue", Helvetica, STHeitiTC-Light, Arial, sans-serif;
 }
 
 html[lang^="zh-"] h1,
@@ -986,7 +986,7 @@ input[type="checkbox"] + label {
 button,
 input[type="button"],
 input[type="submit"] {
-	background-color: #222;
+	background-color: #f60;
 	border: 0;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
@@ -999,7 +999,7 @@ input[type="submit"] {
 	font-size: 0.875rem;
 	font-weight: 800;
 	line-height: 1;
-	padding: 1em 2em;
+	padding: 5px 25px;
 	text-shadow: none;
 	-webkit-transition: background 0.2s;
 	transition: background 0.2s;
@@ -1319,6 +1319,7 @@ a:hover .nav-title,
 	font-weight: 600;
 	-webkit-transition: color 0.2s;
 	transition: color 0.2s;
+	font-size: 16px
 }
 
 .navigation-top .current-menu-item > a,
@@ -1327,7 +1328,7 @@ a:hover .nav-title,
 }
 
 .main-navigation {
-	clear: both;
+/*	clear: both;*/
 	display: block;
 }
 
@@ -1507,7 +1508,7 @@ html {
 }
 
 body {
-	background: #fff;
+	background: #f2f2f2;
 	/* Fallback for when there is no custom background color defined. */
 }
 
@@ -1854,7 +1855,7 @@ body:not(.has-header-image):not(.has-header-video) .custom-header-media {
 --------------------------------------------------------------*/
 
 .site-content-contain {
-	background-color: #fff;
+	background-color: #f2f2f2;
 	position: relative;
 }
 
@@ -2250,7 +2251,7 @@ body:not(.twentyseventeen-front-page) .entry-header {
 --------------------------------------------------------------*/
 
 .page-header {
-	padding-bottom: 2em;
+	padding-bottom: 1em;
 }
 
 .page .entry-header .edit-link {
@@ -3190,7 +3191,7 @@ object {
 	/* Site Branding */
 
 	.site-branding {
-		padding: 3em 0;
+		/*padding: 3em 0;*/
 	}
 
 	/* Front Page */
@@ -3278,19 +3279,21 @@ object {
 
 	.wrap {
 		max-width: 1000px;
-		padding-left: 3em;
-		padding-right: 3em;
+		padding-left: 1em;
+		padding-right: 1em;
 	}
 
 	.has-sidebar:not(.error404) #primary {
 		float: left;
-		width: 58%;
+		width: 72%;
 	}
 
 	.has-sidebar #secondary {
 		float: right;
 		padding-top: 0;
-		width: 36%;
+		width: 26%;
+		background: #fff;
+		border: 1px solid #ebebeb
 	}
 
 	.error404 #primary {
@@ -3375,11 +3378,11 @@ object {
 	/* Navigation */
 
 	.navigation-top {
-		bottom: 0;
+		top: 0px;
 		font-size: 14px;
 		font-size: 0.875rem;
 		left: 0;
-		position: absolute;
+		position: fixed;
 		right: 0;
 		width: 100%;
 		z-index: 3;
@@ -3392,7 +3395,8 @@ object {
 	}
 
 	.navigation-top nav {
-		margin-left: -1.25em;
+		margin-left: 10em;
+		margin-right: 15em;
 	}
 
 	.site-navigation-fixed.navigation-top {
@@ -3406,7 +3410,7 @@ object {
 	}
 
 	.admin-bar .site-navigation-fixed.navigation-top {
-		top: 32px;
+		top: 0px;
 	}
 
 	/* Main Navigation */
@@ -3447,7 +3451,7 @@ object {
 	}
 
 	.main-navigation a {
-		padding: 1em 1.25em;
+		padding: 10px 15px;
 	}
 
 	.main-navigation ul ul {
@@ -4005,7 +4009,8 @@ object {
 	}
 
 	.navigation-top nav {
-		margin-left: 0;
+		margin-left: 10em;
+		margin-right: 15em;
 	}
 
 	/* Sticky posts */

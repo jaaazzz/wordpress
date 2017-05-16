@@ -939,3 +939,11 @@ function setup_postdata( $post ) {
 
 	return false;
 }
+function query_hotkeys(){
+	global $wpdb;
+	$rows = $wpdb->get_results("SELECT keywords FROM " . SS_TABLE . " ORDER BY repeat_count");
+	return $rows;
+	// $row ='jjjj';
+	// echo $row;
+	//return $row;
+}

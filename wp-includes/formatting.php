@@ -426,7 +426,7 @@ function _wptexturize_pushpop_element( $text, &$stack, $disabled_elements ) {
  *                    after paragraphing. Default true.
  * @return string Text which has been converted into correct paragraph tags.
  */
-function wpautop( $pee, $br = true ) {
+function wpautop( $pee, $br = false ) {
 	$pre_tags = array();
 
 	if ( trim($pee) === '' )

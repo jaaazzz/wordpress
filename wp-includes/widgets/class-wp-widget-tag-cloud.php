@@ -76,9 +76,13 @@ class WP_Widget_Tag_Cloud extends WP_Widget {
 		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
 
 		echo $args['before_widget'];
-		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title'];
-		}
+		// if ( $title ) {
+		// 	echo $args['before_title'] . $title . $args['after_title'];
+		// }
+		echo "<div class='title_jw' style='color:#4499ee;font-size:1.15em'>
+			<div style='width:5px;height:1em;background-color:#4499ee;float:left;margin-top:5px;margin-right:15px'></div>
+			<p style='margin-bottom:5px'>热门标签</p>
+		</div>";
 
 		echo '<div class="tagcloud">';
 

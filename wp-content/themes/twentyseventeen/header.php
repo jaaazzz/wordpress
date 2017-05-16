@@ -28,12 +28,19 @@
 
 	<header id="masthead" class="site-header" role="banner">
 
-		<?php get_template_part( 'template-parts/header/header', 'image' ); ?>
+ 		<?//php get_template_part( 'template-parts/header/header', 'image' ); ?> 
 
 		<?php if ( has_nav_menu( 'top' ) ) : ?>
-			<div class="navigation-top">
+			<div class="navigation-top" style='height:75px;
+			background-image: url(<?php echo home_url();?>/wp-content/themes/twentyseventeen/assets/images/banner/2.jpg);background-size:100% 100%;'>
 				<div class="wrap">
+					<a href='<?php echo home_url();?>'>
+						<img src="<?php echo home_url();?>/wp-content/themes/twentyseventeen/assets/images/banner/A3.png" style='height:44px;float:left'/>
+					</a>
 					<?php get_template_part( 'template-parts/navigation/navigation', 'top' ); ?>
+					<div style="display:inline-block;width:300px;position:relative;margin-right:0px;top:-55px;right:-657px">
+						<?php get_search_form(); ?>
+					</div>
 				</div><!-- .wrap -->
 			</div><!-- .navigation-top -->
 		<?php endif; ?>

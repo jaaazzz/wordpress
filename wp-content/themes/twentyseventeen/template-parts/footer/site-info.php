@@ -9,6 +9,6 @@
  */
 
 ?>
-<div class="site-info">
-	<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'twentyseventeen' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'twentyseventeen' ), 'WordPress' ); ?></a>
+<div class="site-info" style="text-align:center">
+	<a>极刻分享   微信/QQ:1504227550</a>
 </div><!-- .site-info -->

@@ -20,7 +20,7 @@
 		<?php if ( 'post' === get_post_type() ) : ?>
 			<div class="entry-meta">
 				<?php
-					echo twentyseventeen_time_link();
+					// echo twentyseventeen_time_link();
 					twentyseventeen_edit_link();
 				?>
 			</div><!-- .entry-meta -->
