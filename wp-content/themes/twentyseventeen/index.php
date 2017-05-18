@@ -86,7 +86,7 @@ get_header(); ?>
 	</div>
 </div><!-- .wrap -->
 <!-- 自定义首页下面的分类链接 -->
-<div class='f_rows' style="width:72%;height:500px;margin:15px auto">
+<div class='f_rows' style="max-width:1000px;height:500px;margin:15px auto;padding:0 1em">
 	<div class='cell_1' style="height:500px;width:33%;border:1px solid #ebebeb;
 			float:left;margin-right:3px;background:#fff;padding:15px">
 		<div class='title_1' style='color:#4499ee;font-size:1.15em'>
