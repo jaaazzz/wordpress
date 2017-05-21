@@ -33,7 +33,7 @@
          'tag__in' => array($post_tag),
          'category__not_in' => array(NULL),  // 不包括的分类ID
          'post__not_in' => array($post->ID),
-         'showposts' => 20,                           // 显示相关文章数量
+         'showposts' => 10,                           // 显示相关文章数量
          'caller_get_posts' => 1
      );
    query_posts($args);
@@ -61,7 +61,7 @@
 	  AND {$wpdb->prefix}posts.post_type = 'post'
 	  AND {$wpdb->prefix}posts.ID != '" . $post->ID . "'
 	  ORDER BY RAND( )
-	  LIMIT 20");
+	  LIMIT 10");
 	  if ( $related ) {
 	      foreach ($related as $related_post) {
 	?>
@@ -91,7 +91,7 @@
 	  AND {$wpdb->prefix}term_taxonomy.term_id = '" . $cats[0] . "'
 	  AND {$wpdb->prefix}posts.ID != '" . $post->ID . "'
 	  ORDER BY RAND( )
-	  LIMIT 20");
+	  LIMIT 10");
 	  if ( $related ) {
 	      foreach ($related as $related_post) {
 	?>

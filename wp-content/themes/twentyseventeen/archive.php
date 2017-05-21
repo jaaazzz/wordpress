@@ -61,7 +61,11 @@ get_header(); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-	<?php get_template_part( 'template-parts/post/content-push');?>
+	<div style="float:right;width:280px">
+		<?php get_template_part( 'template-parts/post/content-push');?>
+		<?php get_template_part( 'template-parts/post/content-newest');?>
+		<?php get_template_part( 'template-parts/post/content-hotest');?>
+	</div>
 </div><!-- .wrap -->
 
 <?php get_footer();
